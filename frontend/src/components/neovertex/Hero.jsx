@@ -1,15 +1,90 @@
+import { useEffect, useRef, useState } from 'react';
 import { NV } from '@/constants/testIds';
 import HeroMesh from './HeroMesh';
 
+/* Count-up animation hook for numeric stats */
+function useCountUp(target, { duration = 1600, decimals = 0 } = {}) {
+  const [v, setV] = useState(0);
+  const rafRef = useRef(0);
+  useEffect(() => {
+    const start = performance.now();
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      setV(target * eased);
+      if (t < 1) rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [target, duration]);
+  return decimals ? v.toFixed(decimals) : Math.round(v);
+}
+
+function Stat({ value, label, suffix = '', prefix = '' }) {
+  const n = useCountUp(value);
+  return (
+    <div className="flex flex-col gap-2">
+      <span className="nv-display text-2xl sm:text-3xl text-white tabular-nums">
+        {prefix}
+        {n}
+        {suffix}
+      </span>
+      <span className="nv-mono text-[10px] uppercase tracking-[0.18em] text-[var(--nv-text-muted)]">
+        {label}
+      </span>
+    </div>
+  );
+}
+
+/* Static (non-numeric) stat */
+function StaticStat({ value, label }) {
+  return (
+    <div className="flex flex-col gap-2">
+      <span className="nv-display text-2xl sm:text-3xl text-white">{value}</span>
+      <span className="nv-mono text-[10px] uppercase tracking-[0.18em] text-[var(--nv-text-muted)]">
+        {label}
+      </span>
+    </div>
+  );
+}
+
 export default function Hero({ onOpenBriefing }) {
+  const meshRef = useRef(null);
+  const contentRef = useRef(null);
+
+  // Subtle parallax — mesh drifts slower than scroll, content drifts a touch faster.
+  useEffect(() => {
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const y = window.scrollY;
+        if (meshRef.current) {
+          meshRef.current.style.transform = `translate3d(0, ${y * 0.18}px, 0)`;
+        }
+        if (contentRef.current) {
+          contentRef.current.style.transform = `translate3d(0, ${y * -0.04}px, 0)`;
+          contentRef.current.style.opacity = String(Math.max(0, 1 - y / 700));
+        }
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
+
   return (
     <section
       id="top"
       data-testid={NV.hero}
       className="relative min-h-screen w-full overflow-hidden border-b border-[var(--nv-border-subtle)]"
     >
-      {/* Animated mesh */}
-      <HeroMesh testId={NV.heroCanvas} />
+      {/* Animated mesh (parallax) */}
+      <div ref={meshRef} className="absolute inset-0 will-change-transform">
+        <HeroMesh testId={NV.heroCanvas} />
+      </div>
 
       {/* Subtle grid lines overlay */}
       <div className="nv-grid-lines absolute inset-0 opacity-[0.45] pointer-events-none" />
@@ -36,7 +111,10 @@ export default function Hero({ onOpenBriefing }) {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10 pt-40 pb-32 lg:pt-48 lg:pb-44">
+      <div
+        ref={contentRef}
+        className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10 pt-40 pb-32 lg:pt-48 lg:pb-44 will-change-transform"
+      >
         <div className="max-w-4xl">
           <div className="flex items-center gap-3 mb-10">
             <span className="h-px w-10 bg-[var(--nv-border-strong)]" />
@@ -90,19 +168,10 @@ export default function Hero({ onOpenBriefing }) {
 
           {/* Stat row */}
           <div className="mt-24 grid grid-cols-2 sm:grid-cols-4 gap-y-8 gap-x-6 max-w-3xl">
-            {[
-              ['07', 'Stack modules'],
-              ['10⁹', 'Events orchestrated / day'],
-              ['SOC 2', 'Type II posture'],
-              ['24×7', 'Operating discipline'],
-            ].map(([k, v]) => (
-              <div key={v} className="flex flex-col gap-2">
-                <span className="nv-display text-2xl sm:text-3xl text-white">{k}</span>
-                <span className="nv-mono text-[10px] uppercase tracking-[0.18em] text-[var(--nv-text-muted)]">
-                  {v}
-                </span>
-              </div>
-            ))}
+            <Stat value={7} label="Stack modules" />
+            <Stat value={22} label="Indian languages" suffix="+" />
+            <StaticStat value="SOC 2" label="Type II posture" />
+            <StaticStat value="24×7" label="Operating discipline" />
           </div>
         </div>
       </div>

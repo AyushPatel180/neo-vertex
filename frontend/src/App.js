@@ -3,6 +3,7 @@ import '@/App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from '@/components/ui/sonner';
 import Nav from '@/components/neovertex/Nav';
+import ScrollProgress from '@/components/neovertex/ScrollProgress';
 import Hero from '@/components/neovertex/Hero';
 import ContinuousLearning from '@/components/neovertex/ContinuousLearning';
 import PrivacyScale from '@/components/neovertex/PrivacyScale';
@@ -25,6 +26,7 @@ function Landing() {
 
   return (
     <div className="min-h-screen bg-[var(--nv-bg)] text-[var(--nv-text-primary)] nv-grain">
+      <ScrollProgress />
       <Nav onOpenBriefing={open} />
       <main>
         <Hero onOpenBriefing={open} />

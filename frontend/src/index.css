@@ -50,6 +50,10 @@
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
   html, body {
     background-color: var(--nv-bg);
     color: var(--nv-text-primary);
@@ -183,13 +187,85 @@
 /* Soft scroll-reveal */
 .nv-reveal {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
-              transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(22px);
+  transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
 }
 .nv-reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+/* Stagger helper — children of a .nv-stagger get incremental delay */
+.nv-stagger > .nv-reveal:nth-child(1) { transition-delay: 0ms; }
+.nv-stagger > .nv-reveal:nth-child(2) { transition-delay: 60ms; }
+.nv-stagger > .nv-reveal:nth-child(3) { transition-delay: 120ms; }
+.nv-stagger > .nv-reveal:nth-child(4) { transition-delay: 180ms; }
+.nv-stagger > .nv-reveal:nth-child(5) { transition-delay: 240ms; }
+.nv-stagger > .nv-reveal:nth-child(6) { transition-delay: 300ms; }
+.nv-stagger > .nv-reveal:nth-child(7) { transition-delay: 360ms; }
+.nv-stagger > .nv-reveal:nth-child(8) { transition-delay: 420ms; }
+.nv-stagger > .nv-reveal:nth-child(9) { transition-delay: 480ms; }
+.nv-stagger > .nv-reveal:nth-child(10) { transition-delay: 540ms; }
+.nv-stagger > .nv-reveal:nth-child(n+11) { transition-delay: 600ms; }
+
+/* Scroll progress bar */
+.nv-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(107, 138, 245, 0) 0%,
+    rgba(107, 138, 245, 0.95) 40%,
+    rgba(14, 165, 233, 1) 100%
+  );
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  z-index: 60;
+  pointer-events: none;
+}
+
+/* Diagram animated stroke utility */
+@keyframes nv-stream {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -80; }
+}
+.nv-stream {
+  stroke-dasharray: 4 6;
+  animation: nv-stream 6s linear infinite;
+}
+@keyframes nv-stream-fast {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -120; }
+}
+.nv-stream-fast {
+  stroke-dasharray: 3 5;
+  animation: nv-stream-fast 3.5s linear infinite;
+}
+.nv-stream-slow {
+  stroke-dasharray: 2 8;
+  animation: nv-stream 14s linear infinite;
+}
+
+/* Diagram tick blink */
+@keyframes nv-tick {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+.nv-tick {
+  animation: nv-tick 1.8s ease-in-out infinite;
+}
+
+/* Diagram message ping */
+@keyframes nv-ping {
+  0% { transform: scale(0.4); opacity: 0.9; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+.nv-ping {
+  transform-origin: center;
+  animation: nv-ping 2.4s ease-out infinite;
 }
 
 /* Animated node pulse */
