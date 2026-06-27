@@ -1,0 +1,108 @@
+{
+  "theme": "dark",
+  "archetype": "Archetype 4: Swiss & High-Contrast (Dark Mode Variant) meets Architectural Luxury",
+  "colors": {
+    "background_base": "#05050A",
+    "surface_primary": "#12141A",
+    "surface_secondary": "#1A1C23",
+    "border_subtle": "#20232E",
+    "border_strong": "#2D313F",
+    "text_primary": "#E2E4EB",
+    "text_secondary": "#9BA1B0",
+    "accent_indigo": "#4F46E5",
+    "accent_azure": "#0EA5E9",
+    "glow_steel_blue": "rgba(59, 130, 246, 0.15)"
+  },
+  "typography": {
+    "heading_font": "Manrope",
+    "body_font": "IBM Plex Sans",
+    "font_weights": {
+      "headings": "600",
+      "body": "400",
+      "labels": "500"
+    },
+    "hierarchy": {
+      "h1": "text-5xl sm:text-6xl tracking-tighter leading-[1.1]",
+      "h2": "text-3xl sm:text-4xl tracking-tight",
+      "h3": "text-xl sm:text-2xl tracking-tight",
+      "body": "text-base leading-relaxed text-[#9BA1B0]",
+      "overline": "text-xs tracking-[0.2em] uppercase text-[#9BA1B0]"
+    }
+  },
+  "spacing_and_layout": {
+    "grid_system": "Architectural Grid. Strict structural alignment. Use display:grid with gap-8 to gap-16.",
+    "section_padding": "py-24 sm:py-32",
+    "container_max_width": "max-w-7xl mx-auto px-6 lg:px-8",
+    "borders": "1px crisp lines (#20232E) to segment sections, avoiding soft box-shadows."
+  },
+  "motion_and_interactions": {
+    "philosophy": "slow fades, gentle slide reveals, subtle scale, layered scroll entrances, line-draw animations, soft node pulses, smooth hover depth, controlled parallax",
+    "hover_states": "subtle elevation via border-color change (from border_subtle to border_strong) and a very soft steel-blue glow. No bouncy transforms.",
+    "scroll_reveal": "Layered architecture interactive scroll-reveal. Components slide in slowly from bottom (opacity 0 to 1, y: 20px to 0) with a 0.6s easing."
+  },
+  "visuals_and_media": {
+    "hero_background": {
+      "type": "canvas_or_svg",
+      "description": "Animated intelligence mesh. Node-and-connection network with subtle data-flow movement. Layered depth with slow parallax.",
+      "colors": "Nodes in soft off-white (opacity 0.4), connections in muted steel (opacity 0.2), occasional slow data packet traversing in azure (opacity 0.8)."
+    },
+    "image_urls": [
+      {
+        "url": "https://customer-assets.emergentagent.com/job_69ebd958-79a8-454e-87b8-a9e6c65955ff/artifacts/bi1mw8pr_logo.png",
+        "category": "logo",
+        "description": "Neo Vertex Brand Logo (Circular monogram 'NV' in blue gradient)"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1545987796-200677ee1011?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNTl8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGRhcmslMjBhcmNoaXRlY3R1cmFsJTIwbmV0d29yayUyMG5vZGV8ZW58MHx8fHwxNzgyNTgxMTU3fDA&ixlib=rb-4.1.0&q=85",
+        "category": "texture",
+        "description": "Dark low-angle architectural metal structure (Use as very faint, 5% opacity overlay for capability blocks if needed)"
+      }
+    ]
+  },
+  "components": {
+    "navigation": {
+      "style": "Sticky minimal top nav. Solid background #05050A/80 with backdrop-blur-xl and a 1px border-b #20232E. z-50."
+    },
+    "buttons": {
+      "primary": "Solid dark charcoal bg (#1A1C23) with a 1px border #2D313F. Text soft white. Hover: subtle steel-blue glow shadow.",
+      "secondary": "Ghost button. Text #9BA1B0, hover:text-white."
+    },
+    "cards": {
+      "style": "Flat background #12141A. 1px border #20232E. No soft drop shadows. Architectural precision."
+    },
+    "form": {
+      "style": "Briefing request form (modal). Shadcn Dialog. Input fields: bg #05050A, border #20232E, focus:ring-1 focus:ring-accent_azure."
+    }
+  },
+  "sections": [
+    {
+      "name": "Hero",
+      "elements": "Cinematic headline, minimal copy, CTA ('Request a Briefing'). Animated intelligence mesh background."
+    },
+    {
+      "name": "Trust Strip",
+      "elements": "Understated enterprise indicators. Text marks only, 40% opacity (#9BA1B0)."
+    },
+    {
+      "name": "The Vertex Platform",
+      "elements": "Layered architecture visualization. Stacked visual layers: Orchestration, Reasoning Core, Memory Mesh, Data Substrate, Governance Plane. Scroll-reveal."
+    },
+    {
+      "name": "Capabilities",
+      "elements": "3-4 architectural blocks. Precise linework diagrams using SVGs. NOT standard card grids."
+    },
+    {
+      "name": "Why Neo Vertex",
+      "elements": "3-column value pillars. Calm, subtle hover depth."
+    },
+    {
+      "name": "Vision / Manifesto",
+      "elements": "Large editorial typography. Single focal statement centered or strongly left-aligned with massive whitespace."
+    },
+    {
+      "name": "Footer",
+      "elements": "Refined hierarchy. Grid layout. Logo + copyright + muted links."
+    }
+  ],
+  "instructions_to_main_agent": "Ensure strictly dark mode. Avoid Shadcn standard 'Cards' with soft shadows; use raw divs with 1px borders for an architectural feel. The hero must use a canvas/SVG animated mesh for the network effect. The 'Request a Briefing' CTA should trigger a Shadcn Dialog containing a form that saves to MongoDB. Include fields: name, work email, company, role, intent (select). ALL interactive elements MUST include data-testid attributes. Implement in React (.js/.jsx files) using Tailwind."
+}
