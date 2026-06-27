@@ -1,12 +1,12 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
-from pydantic import BaseModel, Field, ConfigDict
-from typing import List
+from pydantic import BaseModel, Field, ConfigDict, EmailStr
+from typing import List, Optional, Literal
 import uuid
 from datetime import datetime, timezone
 
@@ -20,51 +20,100 @@ client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
 # Create the main app without a prefix
-app = FastAPI()
+app = FastAPI(title="Neo Vertex Ventures API")
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
 
-# Define Models
+# ----------------- Models -----------------
 class StatusCheck(BaseModel):
-    model_config = ConfigDict(extra="ignore")  # Ignore MongoDB's _id field
-    
+    model_config = ConfigDict(extra="ignore")
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     client_name: str
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
+
 class StatusCheckCreate(BaseModel):
     client_name: str
 
-# Add your routes to the router instead of directly to app
+
+class BriefingRequestCreate(BaseModel):
+    name: str = Field(..., min_length=2, max_length=120)
+    work_email: EmailStr
+    company: str = Field(..., min_length=1, max_length=200)
+    role: str = Field(..., min_length=1, max_length=120)
+    intent: Literal[
+        "platform-evaluation",
+        "architecture-review",
+        "pilot-program",
+        "partnership",
+        "general-inquiry",
+    ]
+    message: Optional[str] = Field(default="", max_length=2000)
+
+
+class BriefingRequest(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    work_email: str
+    company: str
+    role: str
+    intent: str
+    message: str = ""
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+# ----------------- Routes -----------------
 @api_router.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"service": "Neo Vertex Ventures API", "status": "online"}
+
 
 @api_router.post("/status", response_model=StatusCheck)
-async def create_status_check(input: StatusCheckCreate):
-    status_dict = input.model_dump()
-    status_obj = StatusCheck(**status_dict)
-    
-    # Convert to dict and serialize datetime to ISO string for MongoDB
+async def create_status_check(payload: StatusCheckCreate):
+    status_obj = StatusCheck(**payload.model_dump())
     doc = status_obj.model_dump()
     doc['timestamp'] = doc['timestamp'].isoformat()
-    
-    _ = await db.status_checks.insert_one(doc)
+    await db.status_checks.insert_one(doc)
     return status_obj
+
 
 @api_router.get("/status", response_model=List[StatusCheck])
 async def get_status_checks():
-    # Exclude MongoDB's _id field from the query results
     status_checks = await db.status_checks.find({}, {"_id": 0}).to_list(1000)
-    
-    # Convert ISO string timestamps back to datetime objects
     for check in status_checks:
-        if isinstance(check['timestamp'], str):
+        if isinstance(check.get('timestamp'), str):
             check['timestamp'] = datetime.fromisoformat(check['timestamp'])
-    
     return status_checks
+
+
+@api_router.post("/briefings", response_model=BriefingRequest, status_code=201)
+async def create_briefing(payload: BriefingRequestCreate):
+    obj = BriefingRequest(**payload.model_dump())
+    doc = obj.model_dump()
+    doc['created_at'] = doc['created_at'].isoformat()
+    await db.briefing_requests.insert_one(doc)
+    logger.info(f"New briefing request from {obj.company} ({obj.work_email})")
+    return obj
+
+
+@api_router.get("/briefings", response_model=List[BriefingRequest])
+async def list_briefings(limit: int = 100):
+    if limit < 1 or limit > 500:
+        raise HTTPException(status_code=400, detail="limit must be between 1 and 500")
+    rows = (
+        await db.briefing_requests
+        .find({}, {"_id": 0})
+        .sort("created_at", -1)
+        .to_list(limit)
+    )
+    for r in rows:
+        if isinstance(r.get('created_at'), str):
+            r['created_at'] = datetime.fromisoformat(r['created_at'])
+    return rows
+
 
 # Include the router in the main app
 app.include_router(api_router)
@@ -83,6 +132,7 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
