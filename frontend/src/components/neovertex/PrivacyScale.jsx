@@ -22,6 +22,7 @@ const NV_APPROACH = [
 export default function PrivacyScale() {
   return (
     <section
+      id="privacy-scale"
       data-testid={NV.privacyScaleSection}
       className="relative border-b border-[var(--nv-border-subtle)] py-28 lg:py-40 bg-[var(--nv-surface-1)]"
     >
