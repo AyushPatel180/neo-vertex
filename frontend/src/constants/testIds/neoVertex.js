@@ -7,6 +7,8 @@ export const NV = {
   navLogo: 'nv-nav-logo',
   navLinkPlatform: 'nv-nav-link-platform',
   navLinkCapabilities: 'nv-nav-link-capabilities',
+  navLinkResearch: 'nv-nav-link-research',
+  navLinkIndustries: 'nv-nav-link-industries',
   navLinkVision: 'nv-nav-link-vision',
   navLinkBriefing: 'nv-nav-link-briefing',
   navCtaBriefing: 'nv-nav-cta-briefing',

@@ -19,8 +19,8 @@ export default function Nav({ onOpenBriefing }) {
   const links = [
     { id: NV.navLinkPlatform, label: 'Stack', href: '#platform' },
     { id: NV.navLinkCapabilities, label: 'Agents', href: '#agents' },
-    { id: 'nv-nav-link-research', label: 'Research', href: '#research' },
-    { id: 'nv-nav-link-industries', label: 'Industries', href: '#industries' },
+    { id: NV.navLinkResearch, label: 'Research', href: '#research' },
+    { id: NV.navLinkIndustries, label: 'Industries', href: '#industries' },
     { id: NV.navLinkVision, label: 'Vision', href: '#vision' },
   ];
 

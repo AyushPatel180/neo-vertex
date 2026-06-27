@@ -1,53 +1,52 @@
 # Neo Vertex Ventures LLP — Website PRD
 
 ## Original Problem Statement
-Design and build a premium, high-trust, deeply differentiated single-page website for Neo Vertex Ventures LLP — an enterprise deep-tech intelligence-infrastructure company. The site must feel like the public face of an enterprise platform (mood references: Anthropic, Databricks, Palantir, NVIDIA Enterprise AI, Apple) — calm, architectural, expensive, technically credible — while avoiding generic AI-startup clichés, neon, robots, glassmorphism, and template aesthetics.
+Premium, high-trust, deeply differentiated single-page website for Neo Vertex Ventures LLP — an enterprise deep-tech intelligence-infrastructure company. Dark-first, architectural, anti-AI-cliché. After MVP, expanded per a detailed client copy brief covering: positioning ("We build the intelligence infrastructure for the AI Enterprise"), thesis of the continuously-learning enterprise, privacy/scale differentiation, the full 7-module Enterprise AI Stack (Foundation Models, Intelligence Platform, AI OS, Autonomous Agents, Research Platform, Voice Intelligence, Multilingual AI), 10 autonomous enterprise agents, long-horizon research (11 areas + 4 objectives), 14 industries, 6 convictions, "Future of Enterprise Intelligence", and "Build With Us" CTA.
 
 ## Architecture
-- **Frontend**: React 19 + CRA + Tailwind + Shadcn UI (Dialog, sonner). React Router with single `/` route.
+- **Frontend**: React 19 + CRA + Tailwind + Shadcn (Dialog, sonner). Single `/` route.
 - **Backend**: FastAPI with `/api` prefix, MongoDB via motor.
-- **Design system**: Custom dark-first tokens in `index.css` under `--nv-*` and `.nv-*` utilities. Fonts: Manrope (display) + IBM Plex Sans (body) + IBM Plex Mono (eyebrows).
-- **Hero visual**: Custom canvas-based animated intelligence mesh (`HeroMesh.jsx`) — nodes drift, connections render below distance threshold, data packets traverse in azure, mouse halo.
-- **Scroll reveal**: IntersectionObserver-based `useReveal` hook applied to `.nv-reveal` elements.
+- **Design system**: Custom dark-first tokens in `index.css` under `--nv-*` / `.nv-*`. Fonts: Manrope (display) + IBM Plex Sans (body) + IBM Plex Mono (eyebrows). Hero canvas mesh.
+- **Sections (13)**: Nav, Hero, ContinuousLearning, PrivacyScale, EnterpriseStack (7 modules), AgentsGrid (10 agents), Research, Industries, WhyNeoVertex (6 pillars), FutureManifesto, BuildWithUs, Footer, BriefingDialog.
 
-## User Personas
-- **Enterprise architect / CTO** at a regulated institution evaluating intelligence infrastructure.
-- **Procurement / risk lead** scanning for governance posture (SOC 2, residency).
-- **Investor / partner** validating brand seriousness and long-term vision.
+## What's Been Implemented
+**MVP — 2026-06-27**
+- Backend: `POST /api/briefings`, `GET /api/briefings?limit=`, `GET /api/`. Mongo `briefing_requests`.
+- Frontend: dark-first single-page with canvas mesh hero, briefing dialog, sonner toast.
 
-## Core Requirements (Static)
-- Dark-first premium aesthetic; no purple/violet gradients on white; no AI clichés.
-- Sections: Nav, Hero, Trust Strip, The Vertex Platform (5 layers), Capabilities (4 blocks with SVG diagrams), Why Neo Vertex (3 pillars), Vision/Manifesto, Footer.
-- Single primary CTA "Request a Briefing" available from nav, hero, vision, footer.
-- All interactive elements carry `data-testid` (registry: `/app/frontend/src/constants/testIds/neoVertex.js`).
-- Mobile-responsive with simplified nav drawer.
+**Content expansion — 2026-06-27**
+- Restructured to 13 sections matching the full client brief verbatim.
+- New components: `ContinuousLearning`, `PrivacyScale`, `EnterpriseStack` (7 modules with custom SVG diagrams: Foundation Models, Intelligence Platform, AI OS, Autonomous Agents, Research Platform, Voice Intelligence, Multilingual AI), `AgentsGrid` (10 agents), `Research` (11 areas + 4 objectives), `Industries` (9 primary + 5 secondary), `BuildWithUs`.
+- Refreshed: Hero headline + copy, `WhyNeoVertex` (6 convictions), `Manifesto` → "Future of Enterprise Intelligence" with era triplet, Footer columns (Stack/Company/Trust), Nav (5 links).
+- Removed: legacy `PlatformStack.jsx`, `Capabilities.jsx`, `TrustStrip.jsx`.
+- Registry: `NV.navLinkResearch`, `NV.navLinkIndustries`, `NV.footerCtaBriefing`, `NV.stackModule()`, `NV.agentCard()`, `NV.industryItem()`, `NV.researchSection`, `NV.futureSection`, `NV.buildSection`, `NV.buildCta`.
+- Hero `aria-label` for accessibility of multi-line headline.
 
-## What's Been Implemented (2026-06-27)
-- ✅ Backend: `POST /api/briefings`, `GET /api/briefings?limit=`, `GET /api/`. Pydantic v2 models (`BriefingRequestCreate`, `BriefingRequest`). Mongo collection `briefing_requests`. Datetime stored as ISO string.
-- ✅ Frontend: full single-page experience with animated canvas mesh hero, layered platform stack, 4 capability blocks with original SVG line diagrams, 3 conviction pillars, manifesto, footer.
-- ✅ Briefing dialog (Shadcn `Dialog`) — name, work_email, company, role, intent select, optional message → POST to `/api/briefings`, success state, sonner toast.
-- ✅ Custom design tokens & utilities (Manrope + IBM Plex Sans/Mono), grid lines, hairline borders, line-draw animations, mesh canvas.
-- ✅ Testing: 12/12 pytest cases pass, full Playwright E2E pass (hero, nav, all CTAs, form submission, validation, mobile menu).
+**Testing**
+- Iteration 1: 12/12 backend, full E2E pass.
+- Iteration 2: 12/12 backend regression, 68/68 Playwright assertions pass across all new sections.
 
 ## Prioritized Backlog
-**P1 — Hardening / Production**
-- Add basic abuse protection on `POST /api/briefings` (rate limiting + honeypot or HCaptcha) before going public.
-- Add a dedicated `nv-footer-cta-briefing` testid key (currently reuses hero key).
-- Add `aria-label` / structured spacing on hero headline for accessibility/SEO copy.
+**P1 — Production hardening**
+- Add rate-limit + honeypot (or HCaptcha) on public `POST /api/briefings`.
+- Add a DELETE / TTL cleanup for accumulated TEST_-prefixed seed rows.
 
 **P2 — Content & polish**
-- Insight / writing section (long-form architecture notes).
-- Customer logo / case study marks once available (replace text trust strip).
-- Pre-render or SSR via Next.js if SEO becomes a priority.
+- Long-form "Architecture Notes" / research papers section.
+- Real customer logos when available.
+- Email notification on new briefing (Resend / SendGrid).
+- Small admin view to read submitted briefings.
 
-**P3 — Admin**
-- Tiny admin view for the team to read submitted briefings.
-- Email notification on new briefing submission (Resend/SendGrid).
+**P3 — SEO / performance**
+- Pre-render via Next.js for SEO if priority rises.
+- Meta tags + OG image.
 
 ## Files of Note
-- `/app/backend/server.py` — API
-- `/app/frontend/src/App.js` — landing composition
-- `/app/frontend/src/components/neovertex/*` — all section components
-- `/app/frontend/src/index.css` — design tokens & utilities
-- `/app/design_guidelines.json` — generated design system
-- `/app/backend/tests/test_briefings.py` — backend tests
+- `/app/backend/server.py` — API.
+- `/app/frontend/src/App.js` — landing composition.
+- `/app/frontend/src/components/neovertex/*` — all section components.
+- `/app/frontend/src/constants/testIds/neoVertex.js` — testid registry.
+- `/app/frontend/src/index.css` — design tokens & utilities.
+- `/app/design_guidelines.json` — generated design system.
+- `/app/backend/tests/test_briefings.py` — backend tests.
+- `/app/test_reports/iteration_1.json`, `/app/test_reports/iteration_2.json` — test reports.

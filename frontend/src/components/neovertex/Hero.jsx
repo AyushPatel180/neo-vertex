@@ -45,6 +45,7 @@ export default function Hero({ onOpenBriefing }) {
 
           <h1
             data-testid={NV.heroHeadline}
+            aria-label="We build the intelligence infrastructure for the AI Enterprise."
             className="nv-display-heavy text-white text-[44px] sm:text-[64px] lg:text-[84px]"
           >
             We build the
