@@ -17,8 +17,10 @@ export default function Nav({ onOpenBriefing }) {
   }, []);
 
   const links = [
-    { id: NV.navLinkPlatform, label: 'Platform', href: '#platform' },
-    { id: NV.navLinkCapabilities, label: 'Capabilities', href: '#capabilities' },
+    { id: NV.navLinkPlatform, label: 'Stack', href: '#platform' },
+    { id: NV.navLinkCapabilities, label: 'Agents', href: '#agents' },
+    { id: 'nv-nav-link-research', label: 'Research', href: '#research' },
+    { id: 'nv-nav-link-industries', label: 'Industries', href: '#industries' },
     { id: NV.navLinkVision, label: 'Vision', href: '#vision' },
   ];
 
@@ -54,7 +56,7 @@ export default function Nav({ onOpenBriefing }) {
             </div>
           </a>
 
-          <nav className="hidden md:flex items-center gap-9">
+          <nav className="hidden md:flex items-center gap-7">
             {links.map((l) => (
               <a
                 key={l.href}

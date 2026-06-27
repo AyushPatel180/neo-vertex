@@ -47,20 +47,23 @@ export default function Hero({ onOpenBriefing }) {
             data-testid={NV.heroHeadline}
             className="nv-display-heavy text-white text-[44px] sm:text-[64px] lg:text-[84px]"
           >
-            Intelligence,
+            We build the
             <br />
-            <span className="text-[var(--nv-text-secondary)]">engineered</span> as
+            <span className="text-[var(--nv-text-secondary)]">intelligence infrastructure</span>
             <br />
-            infrastructure.
+            for the AI Enterprise.
           </h1>
 
           <p
             data-testid={NV.heroSubcopy}
-            className="mt-10 max-w-xl text-[15px] sm:text-[16px] leading-relaxed text-[var(--nv-text-secondary)]"
+            className="mt-10 max-w-2xl text-[15px] sm:text-[16px] leading-relaxed text-[var(--nv-text-secondary)]"
           >
-            Neo Vertex builds the orchestration substrate that lets enterprises
-            compose, govern and operate intelligent systems at the scale of
-            their actual business — not the scale of a demo.
+            From private foundation models and enterprise memory systems to
+            autonomous agents, multilingual AI, voice intelligence, and
+            next-generation AI research — Neo Vertex engineers the secure,
+            production-grade platforms that let organizations operate on AI at
+            enterprise scale, while keeping complete ownership of their
+            knowledge.
           </p>
 
           <div className="mt-12 flex flex-col sm:flex-row gap-4">
@@ -87,7 +90,7 @@ export default function Hero({ onOpenBriefing }) {
           {/* Stat row */}
           <div className="mt-24 grid grid-cols-2 sm:grid-cols-4 gap-y-8 gap-x-6 max-w-3xl">
             {[
-              ['05', 'Architectural layers'],
+              ['07', 'Stack modules'],
               ['10⁹', 'Events orchestrated / day'],
               ['SOC 2', 'Type II posture'],
               ['24×7', 'Operating discipline'],

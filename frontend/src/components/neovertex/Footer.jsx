@@ -5,21 +5,25 @@ const LOGO_URL =
 
 const COLS = [
   {
-    heading: 'Platform',
+    heading: 'Stack',
     links: [
-      { slug: 'orchestration', label: 'Orchestration Plane', href: '#platform' },
-      { slug: 'reasoning', label: 'Reasoning Core', href: '#platform' },
-      { slug: 'memory', label: 'Memory Mesh', href: '#platform' },
-      { slug: 'governance', label: 'Governance Plane', href: '#platform' },
+      { slug: 'foundation-models', label: 'Foundation Models', href: '#foundation-models' },
+      { slug: 'intelligence-platform', label: 'Intelligence Platform', href: '#intelligence-platform' },
+      { slug: 'ai-os', label: 'AI Operating System', href: '#ai-os' },
+      { slug: 'autonomous-agents', label: 'Autonomous Agents', href: '#autonomous-agents' },
+      { slug: 'research-platform', label: 'Research Platform', href: '#research-platform' },
+      { slug: 'voice-intelligence', label: 'Voice Intelligence', href: '#voice-intelligence' },
+      { slug: 'multilingual-ai', label: 'Multilingual AI', href: '#multilingual-ai' },
     ],
   },
   {
     heading: 'Company',
     links: [
-      { slug: 'about', label: 'About', href: '#vision' },
-      { slug: 'capabilities', label: 'Capabilities', href: '#capabilities' },
+      { slug: 'why', label: 'Why Neo Vertex', href: '#why' },
+      { slug: 'research', label: 'Research', href: '#research' },
+      { slug: 'industries', label: 'Industries', href: '#industries' },
       { slug: 'vision', label: 'Vision', href: '#vision' },
-      { slug: 'careers', label: 'Careers', href: '#vision' },
+      { slug: 'careers', label: 'Careers', href: '#build' },
     ],
   },
   {
@@ -50,13 +54,14 @@ export default function Footer({ onOpenBriefing }) {
               </div>
             </div>
             <p className="mt-6 max-w-md text-[14px] leading-relaxed text-[var(--nv-text-secondary)]">
-              Neo Vertex builds the orchestration substrate for enterprise
-              intelligence. We work with institutions stewarding the next
-              decade of their operations.
+              We build the intelligence infrastructure for the AI Enterprise.
+              From private foundation models to autonomous agents and
+              long-horizon research — engineered for organisations that intend
+              to own, not rent, their AI future.
             </p>
             <button
               type="button"
-              data-testid={`${NV.heroCtaPrimary}-footer`}
+              data-testid={NV.footerCtaBriefing}
               onClick={onOpenBriefing}
               className="mt-8 nv-btn-ghost"
             >

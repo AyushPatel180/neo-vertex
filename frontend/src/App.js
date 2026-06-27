@@ -4,11 +4,15 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from '@/components/ui/sonner';
 import Nav from '@/components/neovertex/Nav';
 import Hero from '@/components/neovertex/Hero';
-import TrustStrip from '@/components/neovertex/TrustStrip';
-import PlatformStack from '@/components/neovertex/PlatformStack';
-import Capabilities from '@/components/neovertex/Capabilities';
+import ContinuousLearning from '@/components/neovertex/ContinuousLearning';
+import PrivacyScale from '@/components/neovertex/PrivacyScale';
+import EnterpriseStack from '@/components/neovertex/EnterpriseStack';
+import AgentsGrid from '@/components/neovertex/AgentsGrid';
+import Research from '@/components/neovertex/Research';
+import Industries from '@/components/neovertex/Industries';
 import WhyNeoVertex from '@/components/neovertex/WhyNeoVertex';
 import Manifesto from '@/components/neovertex/Manifesto';
+import BuildWithUs from '@/components/neovertex/BuildWithUs';
 import Footer from '@/components/neovertex/Footer';
 import BriefingDialog from '@/components/neovertex/BriefingDialog';
 import { useReveal } from '@/components/neovertex/useReveal';
@@ -24,11 +28,15 @@ function Landing() {
       <Nav onOpenBriefing={open} />
       <main>
         <Hero onOpenBriefing={open} />
-        <TrustStrip />
-        <PlatformStack />
-        <Capabilities />
+        <ContinuousLearning />
+        <PrivacyScale />
+        <EnterpriseStack />
+        <AgentsGrid />
+        <Research />
+        <Industries />
         <WhyNeoVertex />
-        <Manifesto onOpenBriefing={open} />
+        <Manifesto />
+        <BuildWithUs onOpenBriefing={open} />
       </main>
       <Footer onOpenBriefing={open} />
       <BriefingDialog open={briefingOpen} onOpenChange={setBriefingOpen} />

@@ -54,4 +54,19 @@ export const NV = {
   briefingCancel: 'nv-briefing-cancel',
   briefingSuccess: 'nv-briefing-success',
   briefingError: 'nv-briefing-error',
+
+  // New extended sections
+  continuousSection: 'nv-continuous-section',
+  privacyScaleSection: 'nv-privacy-scale-section',
+  stackSection: 'nv-stack-section',
+  stackModule: (slug) => `nv-stack-module-${slug}`,
+  agentsSection: 'nv-agents-section',
+  agentCard: (slug) => `nv-agent-${slug}`,
+  researchSection: 'nv-research-section',
+  industriesSection: 'nv-industries-section',
+  industryItem: (slug) => `nv-industry-${slug}`,
+  futureSection: 'nv-future-section',
+  buildSection: 'nv-build-section',
+  buildCta: 'nv-build-cta',
+  footerCtaBriefing: 'nv-footer-cta-briefing',
 };
