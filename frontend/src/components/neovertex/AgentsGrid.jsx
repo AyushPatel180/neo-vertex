@@ -35,7 +35,7 @@ export default function AgentsGrid() {
               <span className="h-px w-10 bg-[var(--nv-border-strong)]" />
               <span className="nv-eyebrow">§04 — Autonomous Enterprise Agents</span>
             </div>
-            <h2 className="nv-display text-white text-[40px] sm:text-[52px] leading-[1.05]">
+            <h2 className="nv-display text-white text-[28px] min-[375px]:text-[34px] min-[425px]:text-[40px] sm:text-[52px] leading-[1.05]">
               Purpose-built AI workers,
               <br />
               <span className="text-[var(--nv-text-secondary)]">
@@ -49,7 +49,7 @@ export default function AgentsGrid() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 border-t border-l border-[var(--nv-border-subtle)]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 border-t border-l border-[var(--nv-border-subtle)]">
           {AGENTS.map((a, i) => (
             <div
               key={a.slug}

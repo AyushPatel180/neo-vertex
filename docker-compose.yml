@@ -1,0 +1,47 @@
+services:
+  # ── MongoDB ──────────────────────────────────────────────────────────────
+  mongo:
+    image: mongo:7
+    container_name: neo-vertex-mongo
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Backend (FastAPI) ─────────────────────────────────────────────────────
+  backend:
+    build: ./backend
+    container_name: neo-vertex-backend
+    restart: unless-stopped
+    environment:
+      MONGO_URL: mongodb://mongo:27017
+      DB_NAME: neo_vertex
+      CORS_ORIGINS: http://localhost:8080
+    ports:
+      - "8001:8001"
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+  # ── Frontend (React → nginx) ──────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # CRA bakes this URL into the JS bundle at build time
+        REACT_APP_BACKEND_URL: http://localhost:8001
+    container_name: neo-vertex-frontend
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:

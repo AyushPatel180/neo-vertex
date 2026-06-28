@@ -24,7 +24,7 @@ export default function FutureManifesto() {
             </span>
           </div>
           <div className="col-span-12 lg:col-span-9 nv-reveal">
-            <h2 className="nv-display text-white text-[34px] sm:text-[48px] lg:text-[60px] leading-[1.08] max-w-5xl">
+            <h2 className="nv-display text-white text-[26px] min-[375px]:text-[30px] min-[425px]:text-[34px] sm:text-[48px] lg:text-[60px] leading-[1.08] max-w-5xl">
               The future enterprise will not simply{' '}
               <span className="text-[var(--nv-text-secondary)]">use</span> AI.
               <br />

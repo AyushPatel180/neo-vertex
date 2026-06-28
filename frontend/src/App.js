@@ -17,19 +17,33 @@ import BuildWithUs from '@/components/neovertex/BuildWithUs';
 import Footer from '@/components/neovertex/Footer';
 import BriefingDialog from '@/components/neovertex/BriefingDialog';
 import { useReveal } from '@/components/neovertex/useReveal';
+import IntroLoader from '@/components/neovertex/IntroLoader';
+
 
 function Landing() {
+  const [loading, setLoading] = useState(true);
+  const [landingStage, setLandingStage] = useState('hidden');
   const [briefingOpen, setBriefingOpen] = useState(false);
   useReveal();
 
   const open = () => setBriefingOpen(true);
 
   return (
-    <div className="min-h-screen bg-[var(--nv-bg)] text-[var(--nv-text-primary)] nv-grain">
+    <>
+      {loading && (
+        <IntroLoader
+          onZoomStart={() => setLandingStage('visible')}
+          onComplete={() => {
+            setLandingStage('visible');
+            setLoading(false);
+          }}
+        />
+      )}
+      <div className="min-h-screen bg-[var(--nv-bg)] text-[var(--nv-text-primary)] nv-grain">
       <ScrollProgress />
       <Nav onOpenBriefing={open} />
       <main>
-        <Hero onOpenBriefing={open} />
+        <Hero onOpenBriefing={open} visible={landingStage === 'visible'} />
         <ContinuousLearning />
         <PrivacyScale />
         <EnterpriseStack />
@@ -54,6 +68,7 @@ function Landing() {
         }}
       />
     </div>
+    </>
   );
 }
 

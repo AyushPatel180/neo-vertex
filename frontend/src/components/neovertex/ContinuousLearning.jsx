@@ -24,7 +24,7 @@ export default function ContinuousLearning() {
 
         {/* Headline — full-width, tighter */}
         <div className="grid grid-cols-12 gap-6 nv-reveal">
-          <h2 className="col-span-12 lg:col-span-10 nv-display text-white text-[40px] sm:text-[56px] lg:text-[68px] leading-[1.04] tracking-[-0.035em]">
+          <h2 className="col-span-12 lg:col-span-10 nv-display text-white text-[28px] min-[375px]:text-[34px] min-[425px]:text-[40px] sm:text-[56px] lg:text-[68px] leading-[1.04] tracking-[-0.035em]">
             The next generation of enterprises{' '}
             <span className="text-[var(--nv-text-secondary)]">
               will not be defined by software.

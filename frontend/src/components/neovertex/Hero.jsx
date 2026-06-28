@@ -48,7 +48,7 @@ function StaticStat({ value, label }) {
   );
 }
 
-export default function Hero({ onOpenBriefing }) {
+export default function Hero({ onOpenBriefing, visible }) {
   const meshRef = useRef(null);
   const contentRef = useRef(null);
 
@@ -113,10 +113,10 @@ export default function Hero({ onOpenBriefing }) {
       {/* Content */}
       <div
         ref={contentRef}
-        className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10 pt-40 pb-32 lg:pt-48 lg:pb-44 will-change-transform"
+        className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10 pt-32 pb-24 lg:pt-36 lg:pb-28 will-change-transform"
       >
-        <div className="max-w-4xl">
-          <div className="flex items-center gap-3 mb-10">
+        <div className="max-w-4xl lg:max-w-6xl">
+          <div className={`flex items-center gap-3 mb-6 lg:mb-8 nv-emerge delay-[100ms] ${visible ? 'is-emerged' : ''}`}>
             <span className="h-px w-10 bg-[var(--nv-border-strong)]" />
             <span className="nv-eyebrow">Neo Vertex Ventures · Deep-Tech</span>
           </div>
@@ -124,18 +124,22 @@ export default function Hero({ onOpenBriefing }) {
           <h1
             data-testid={NV.heroHeadline}
             aria-label="We build the intelligence infrastructure for the AI Enterprise."
-            className="nv-display-heavy text-white text-[44px] sm:text-[64px] lg:text-[84px]"
+            className="nv-display-heavy text-white text-[32px] min-h-0 min-[375px]:text-[38px] min-[425px]:text-[44px] sm:text-[64px] lg:text-[84px] leading-[1.1]"
           >
-            We build the
-            <br />
-            <span className="text-[var(--nv-text-secondary)]">intelligence infrastructure</span>
-            <br />
-            for the AI Enterprise.
+            <span className={`block nv-emerge delay-[200ms] ${visible ? 'is-emerged' : ''}`}>
+              We build the
+            </span>
+            <span className={`block text-[var(--nv-text-secondary)] nv-emerge delay-[350ms] ${visible ? 'is-emerged' : ''}`}>
+              intelligence infrastructure
+            </span>
+            <span className={`block nv-emerge delay-[500ms] ${visible ? 'is-emerged' : ''}`}>
+              for the AI Enterprise.
+            </span>
           </h1>
 
           <p
             data-testid={NV.heroSubcopy}
-            className="mt-10 max-w-2xl text-[15px] sm:text-[16px] leading-relaxed text-[var(--nv-text-secondary)]"
+            className={`mt-6 lg:mt-8 max-w-[600px] text-[15px] sm:text-[16px] leading-relaxed text-[var(--nv-text-secondary)] nv-emerge delay-[650ms] ${visible ? 'is-emerged' : ''}`}
           >
             From private foundation models and enterprise memory systems to
             autonomous agents, multilingual AI, voice intelligence, and
@@ -145,7 +149,7 @@ export default function Hero({ onOpenBriefing }) {
             knowledge.
           </p>
 
-          <div className="mt-12 flex flex-col sm:flex-row gap-4">
+          <div className={`mt-8 lg:mt-10 flex flex-col sm:flex-row gap-4 nv-emerge delay-[800ms] ${visible ? 'is-emerged' : ''}`}>
             <button
               type="button"
               data-testid={NV.heroCtaPrimary}
@@ -167,7 +171,7 @@ export default function Hero({ onOpenBriefing }) {
           </div>
 
           {/* Stat row */}
-          <div className="mt-24 grid grid-cols-2 sm:grid-cols-4 gap-y-8 gap-x-6 max-w-3xl">
+          <div className={`mt-12 lg:mt-16 grid grid-cols-2 sm:grid-cols-4 gap-y-8 gap-x-6 max-w-3xl nv-emerge delay-[950ms] ${visible ? 'is-emerged' : ''}`}>
             <Stat value={7} label="Stack modules" />
             <Stat value={22} label="Indian languages" suffix="+" />
             <StaticStat value="SOC 2" label="Type II posture" />

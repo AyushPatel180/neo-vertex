@@ -91,7 +91,7 @@ export default function EnterpriseStack() {
               <span className="h-px w-10 bg-[var(--nv-border-strong)]" />
               <span className="nv-eyebrow">§03 — The Enterprise AI Stack</span>
             </div>
-            <h2 className="nv-display text-white text-[40px] sm:text-[52px] lg:text-[60px] leading-[1.05]">
+            <h2 className="nv-display text-white text-[28px] min-[375px]:text-[34px] min-[425px]:text-[40px] sm:text-[52px] lg:text-[60px] leading-[1.05]">
               Seven modules.
               <br />
               <span className="text-[var(--nv-text-secondary)]">One coherent system.</span>
@@ -117,10 +117,10 @@ export default function EnterpriseStack() {
                 style={{ transitionDelay: `${i * 50}ms` }}
               >
                 <div
-                  className={`col-span-12 lg:col-span-7 p-8 lg:p-12 ${
+                  className={`col-span-12 lg:col-span-7 p-8 lg:p-12 border-b lg:border-b-0 border-[var(--nv-border-subtle)] ${
                     reverse
-                      ? 'lg:order-2 lg:border-l border-[var(--nv-border-subtle)]'
-                      : 'lg:border-r border-[var(--nv-border-subtle)]'
+                      ? 'lg:order-2 lg:border-l'
+                      : 'lg:order-1 lg:border-r'
                   }`}
                 >
                   <div className="flex items-center justify-between">

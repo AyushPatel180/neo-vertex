@@ -75,7 +75,7 @@ export default function BriefingDialog({ open, onOpenChange }) {
     >
       <DialogContent
         data-testid={NV.briefingDialog}
-        className="bg-[var(--nv-surface-1)] border-[var(--nv-border-subtle)] text-[var(--nv-text-primary)] max-w-xl p-0 overflow-hidden rounded-none sm:rounded-none"
+        className="bg-[var(--nv-surface-1)] border-[var(--nv-border-subtle)] text-[var(--nv-text-primary)] max-w-xl p-0 max-h-[95vh] sm:max-h-[90vh] overflow-y-auto rounded-none sm:rounded-none"
       >
         {/* hairline frame */}
         <div className="p-8 sm:p-10">

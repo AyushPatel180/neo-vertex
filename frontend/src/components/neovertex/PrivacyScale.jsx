@@ -33,7 +33,7 @@ export default function PrivacyScale() {
               <span className="h-px w-10 bg-[var(--nv-border-strong)]" />
               <span className="nv-eyebrow">§02 — Enterprise AI</span>
             </div>
-            <h2 className="nv-display text-white text-[40px] sm:text-[52px] leading-[1.05]">
+            <h2 className="nv-display text-white text-[28px] min-[375px]:text-[34px] min-[425px]:text-[40px] sm:text-[52px] leading-[1.05]">
               Built for Privacy.
               <br />
               <span className="text-[var(--nv-text-secondary)]">
@@ -80,7 +80,7 @@ export default function PrivacyScale() {
             <h3 className="mt-4 nv-display text-white text-2xl sm:text-3xl">
               Complete AI ecosystems, working as one.
             </h3>
-            <div className="mt-8 grid grid-cols-2 gap-y-3 gap-x-6">
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6">
               {NV_APPROACH.map((m) => (
                 <div
                   key={m}

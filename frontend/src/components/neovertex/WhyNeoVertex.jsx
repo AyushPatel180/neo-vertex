@@ -23,7 +23,7 @@ export default function WhyNeoVertex() {
               <span className="h-px w-10 bg-[var(--nv-border-strong)]" />
               <span className="nv-eyebrow">§07 — Why Neo Vertex</span>
             </div>
-            <h2 className="nv-display text-white text-[40px] sm:text-[52px] leading-[1.05]">
+            <h2 className="nv-display text-white text-[28px] min-[375px]:text-[34px] min-[425px]:text-[40px] sm:text-[52px] leading-[1.05]">
               We are not selling AI.
               <br />
               <span className="text-[var(--nv-text-secondary)]">

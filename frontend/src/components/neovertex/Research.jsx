@@ -35,7 +35,7 @@ export default function Research() {
               <span className="h-px w-10 bg-[var(--nv-border-strong)]" />
               <span className="nv-eyebrow">§05 — Research</span>
             </div>
-            <h2 className="nv-display text-white text-[40px] sm:text-[52px] leading-[1.05]">
+            <h2 className="nv-display text-white text-[28px] min-[375px]:text-[34px] min-[425px]:text-[40px] sm:text-[52px] leading-[1.05]">
               Engineering solves today’s problems.
               <br />
               <span className="text-[var(--nv-text-secondary)]">
@@ -50,7 +50,7 @@ export default function Research() {
         </div>
 
         {/* Research areas grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-t border-l border-[var(--nv-border-subtle)] mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-t border-l border-[var(--nv-border-subtle)] mb-16">
           {RESEARCH_AREAS.map((a, i) => (
             <div
               key={a}
@@ -71,11 +71,11 @@ export default function Research() {
         </div>
 
         {/* Objectives row */}
-        <div className="border border-[var(--nv-border-subtle)] grid grid-cols-2 lg:grid-cols-4 nv-reveal">
+        <div className="border-t border-l border-[var(--nv-border-subtle)] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 nv-reveal">
           {OBJECTIVES.map(([sym, obj], i) => (
             <div
               key={obj}
-              className={`p-8 ${i < OBJECTIVES.length - 1 ? 'border-r border-[var(--nv-border-subtle)]' : ''} ${i < 2 ? 'border-b lg:border-b-0 border-[var(--nv-border-subtle)]' : ''}`}
+              className="p-8 border-r border-b border-[var(--nv-border-subtle)]"
             >
               <span className="nv-display text-[var(--nv-accent-azure)] text-3xl">{sym}</span>
               <p className="mt-4 text-[13px] leading-relaxed text-[var(--nv-text-secondary)]">

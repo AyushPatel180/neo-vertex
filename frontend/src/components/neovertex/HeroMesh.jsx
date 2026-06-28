@@ -21,18 +21,28 @@ export default function HeroMesh({ testId }) {
     let height = 0;
     let nodes = [];
     let packets = [];
+    let lastWidth = 0;
+    let lastHeight = 0;
 
     const NODE_COUNT_BASE = 64;
     const LINK_DIST = 150;
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
-      width = rect.width;
-      height = rect.height;
+      const newWidth = rect.width;
+      const newHeight = rect.height;
+
+      width = newWidth;
+      height = newHeight;
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      seedNodes();
+
+      if (Math.abs(newWidth - lastWidth) > 30 || Math.abs(newHeight - lastHeight) > 30) {
+        seedNodes();
+        lastWidth = newWidth;
+        lastHeight = newHeight;
+      }
     };
 
     const seedNodes = () => {

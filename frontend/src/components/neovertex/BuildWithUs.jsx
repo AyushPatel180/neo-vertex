@@ -25,7 +25,7 @@ export default function BuildWithUs({ onOpenBriefing }) {
             </div>
           </div>
           <div className="col-span-12 lg:col-span-9">
-            <h2 className="nv-display text-white text-[40px] sm:text-[56px] lg:text-[64px] leading-[1.05] max-w-4xl">
+            <h2 className="nv-display text-white text-[28px] min-[375px]:text-[34px] min-[425px]:text-[40px] sm:text-[56px] lg:text-[64px] leading-[1.05] max-w-5xl">
               Whether you’re a Fortune 500 modernising operations
               <br />
               <span className="text-[var(--nv-text-secondary)]">

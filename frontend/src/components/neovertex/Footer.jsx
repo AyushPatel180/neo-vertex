@@ -98,13 +98,13 @@ export default function Footer({ onOpenBriefing }) {
         </div>
 
         {/* hairline */}
-        <div className="mt-16 pt-8 border-t border-[var(--nv-border-subtle)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-4 nv-mono text-[10px] tracking-[0.22em] uppercase text-[var(--nv-text-muted)]">
+        <div className="mt-16 pt-8 border-t border-[var(--nv-border-subtle)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 nv-mono text-[10px] tracking-[0.22em] uppercase text-[var(--nv-text-muted)]">
             <span>© {new Date().getFullYear()} Neo Vertex Ventures LLP</span>
-            <span className="text-[var(--nv-border-strong)]">/</span>
+            <span className="text-[var(--nv-border-strong)] hidden min-[375px]:inline">/</span>
             <span>All Rights Reserved</span>
           </div>
-          <div className="flex items-center gap-6 nv-mono text-[10px] tracking-[0.22em] uppercase text-[var(--nv-text-muted)]">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 nv-mono text-[10px] tracking-[0.22em] uppercase text-[var(--nv-text-muted)]">
             <a
               href="#vision"
               data-testid={NV.footerLink('privacy')}
